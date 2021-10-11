@@ -1,0 +1,21 @@
+Courber les lignes de flux : mettre à jour la géométrie :
+
+difference(
+difference(
+make_line(
+        start_point($geometry),
+        centroid(
+            offset_curve(
+								$geometry,
+                -- 10 is curve coefficient, adjust-it
+                -- a bigger number (e.g. 15) flatten the curve
+                -- a lower number (e.g. 5) round the curve
+								length($geometry) / 10
+							)
+					),
+        end_point($geometry)
+			)
+buffer(start_point($geometry), 500)
+),
+buffer(end_point( $geometry), 500)
+)
